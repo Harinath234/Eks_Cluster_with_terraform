@@ -82,6 +82,7 @@ pipeline {
                 cd eks-install
 
                 terraform apply -auto-approve tfplan
+             // terraform destroy -auto-approve
                 '''
             }
         }

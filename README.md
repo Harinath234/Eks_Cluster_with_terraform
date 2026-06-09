@@ -1,5 +1,34 @@
 <img width="940" height="395" alt="image" src="https://github.com/user-attachments/assets/33641fea-de42-4f3f-9e9f-8e75af868177" />
 
+# Project Flow
+
+```text
+
+GitHub
+   ↓
+Jenkins Checkout
+   ↓
+Terraform Init
+   ↓
+Read backend block
+   ↓
+Connect S3 + DynamoDB
+   ↓
+Terraform Plan
+   ↓
+Read modules/vpc
+Read modules/eks
+   ↓
+Terraform Apply
+   ↓
+AWS VPC Created
+AWS EKS Created
+AWS Node Groups Created
+   ↓
+terraform.tfstate stored in S3
+
+```
+
 
 ### Terraform code 
 

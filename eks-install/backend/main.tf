@@ -3,7 +3,8 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "mindcircuit-eks-bucket"
+bucket = "harinath-eks-tfstate-2026"  
+# bucket = "mindcircuit-eks-bucket"
 
   lifecycle {
     prevent_destroy = false

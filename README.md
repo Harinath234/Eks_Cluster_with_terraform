@@ -29,6 +29,28 @@ terraform.tfstate stored in S3
 
 ```
 
+Terraform Backend Architecture
+
+```
+
+Terraform Apply
+       │
+       ▼
+ ┌─────────────┐
+ │ DynamoDB    │
+ │ Lock Table  │
+ └─────────────┘
+       │
+       ▼
+ ┌─────────────┐
+ │ S3 Bucket   │
+ │ tfstate     │
+ └─────────────┘
+       │
+       ▼
+ AWS Resources
+ (VPC, EKS, Nodes)
+```
 
 ### Terraform code 
 
@@ -74,6 +96,37 @@ C. In the pipeline config, choose:
 -	`SCM`: Git
 -	`Repository URL`: https://github.com/adarsh0331/Eks_Cluster_with_terraform.git
 -	`Script Path`: eks-install/Jenkinsfile
+
+## Install Terraform once on the Jenkins server:
+
+sudo yum install -y unzip
+curl -LO https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
+unzip terraform_1.6.6_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+terraform --version
+
+Step 1: Create Backend Resources
+
+Go to:
+
+cd /opt/Project_10_Eks_Cluster_with_terraform/eks-install/backend
+
+Then run:
+
+terraform init
+terraform apply -auto-approve
+
+This must successfully create:
+
+S3 Bucket
+DynamoDB Table
+Check if bucket exists
+
+Run:
+
+aws s3 ls
+
+After Bucket exists
 
 ### Trigger the Pipeline
 Click “Build Now” in Jenkins to provision the EKS cluster.
